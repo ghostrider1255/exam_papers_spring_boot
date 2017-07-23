@@ -1,0 +1,523 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Filter Test</title>
+<style type="text/css">
+
+div {
+	display: block;
+}
+
+#wrapper{
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+}
+#top{
+	width: 100%;
+	height: 180px;
+	background: white;
+	//border: 2px ridge red;
+}
+#body{
+	width: 1200px;
+	min-height: 2300px;
+	overflow-y: auto;
+	margin: 0 auto;
+	background: #F2F3F4;
+	padding: 0;
+	//border: 2px ridge black;
+}
+#foot{
+	width: 100%;
+	height: 300px;
+	background: #1B2631;
+	border-radius: 10px 10px 0px 0px;
+}
+#logoBody{
+	width: 1200px;
+	height: 174px;
+	margin: 0 auto;
+	background: white;
+	//border: 2px ridge red;
+}
+
+#logoCategory{
+	width: 200px;
+	height: 176px;
+	background-color: white;
+	position: absolute;
+	float: left;
+	//border: 1px ridge black;
+}
+
+#logoContainer{
+	width: 980px;
+	height: 172px;
+	background-color: white;
+	float: right;
+	//border: 1px ridge black;
+}
+#category{
+	width: 200px;
+	height: 1400px;
+	background-color: #F2F3F4;
+	position: absolute;
+	float: left;
+	//border: 2px ridge yellow;
+}
+#categoryHeader{
+	width: 200px;
+	height: 30px;
+	background-color: #589ADB;
+	border-radius: 10px 10px 0px 0px;
+	position: absolute;
+	bottom: 0px;
+	font-style: Bold;
+	font-size: 20px;
+	color: white;
+	float: left;
+	padding: 5px 0px 5px;
+}
+#horizontalMenuArea{
+	position: absolute;
+	top: 0px;
+	width: 900px;
+	height: 50px;
+	background-color: #102841;
+	border-radius: 10px 10px 0px 0px;
+	font-style: Bold;
+	font-size: 17px;
+	color: white;
+	bottom: 10px;
+	margin-top: 137px;
+	margin-left: 20px;
+}
+#container{
+	width: 980px;
+	height: 1150px;
+	background-color: #F2F3F4;
+	float: right;
+	//padding: 20px 0px 20px 20px;
+	//border: 2px ridge red;
+}
+
+#itemHeader{
+	display: inline-block;
+	width: 900px;
+	height: 45px;
+	background-color: white;
+	text-align: left;
+	font-size: 20px;
+	border: 1px ridge;
+	margin: 20px;
+}
+#item{
+	display: inline-block;
+	float: left;
+	width: 270px;
+	height: 300px;
+	margin: 20px 20px 20px 20px;
+	background-color: white;
+	//border: 2px ridge red;
+}
+#footerInfo{
+	width: 100%;
+	position: absolute;
+	margin-top: 50px;
+}
+ul.horizMenu{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	
+}
+li.horizMenu{
+	float: left;
+}
+li a.horizMenu{
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 20px 30px;
+	text-decoration: none;
+}
+li a.horizMenu:hover{
+	color: #589ADB;
+}
+
+li.horizMenu:first-child a.horizMenu{
+	color: #589ADB;
+}
+ul.footerMenu{
+	list-style-type: none;
+	margin: 0;
+	padding: 10px;
+	width: 220px;
+	display: inline-block;
+	float: left;
+	//background-color: white;
+}
+li.footerMenu{
+	border-bottom:0px;
+	padding: 10px 25px 5px 45px;
+}
+li.footerMenu:first-child{
+	font-size: 15px;
+	color: white;
+}
+li.footerMenu a.footerMenu{
+	color: #589ADB;
+	padding: 10px 15px 20px;
+	text-decoration: none;
+	font-size: 12px;
+}
+ul.ulcategory{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 200px;
+	background-color: white;
+}
+li.ulcategory{
+border-bottom: 2px solid #F2F3F4;
+
+}
+li.ulcategory:last-child {
+    border-bottom: none;
+}
+li a.ulcategory{
+	display: block;
+	color: #000;
+	padding: 8px 10px;
+	text-decoration: none;
+	font-size: 13px;
+}
+li a.ulcategory:hover{
+	background-color: white;
+	color: blue;
+}
+
+ul.horiz-menu{
+	position: absolute;
+	bottom: 0px;
+	list-style-type: none;
+	margin: 0;
+    padding: 0;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    
+}
+li.horiz-menu{
+	display: inline;
+	float: left;
+}
+
+li a.horiz-menu{
+	display: block;
+	color: white;
+	padding: 8px 10px;
+	text-decoration: none;
+	font-size: 17px;
+}
+table{
+	width: 100%;
+	height: 150px;
+	border-collapse: collapse;
+	padding: 0;
+}
+thead{
+	height: 100px;
+}
+
+.searchArea{
+	//display: inline-block;
+	background: none;
+	height: 31px;
+	width: 630px;
+	margin-top: 60px;
+	margin-left: 22px;
+	border: 0px;
+	border-radius: 0px 5px 5px 0px;	
+	//border: 2px ridge red;
+	
+}
+.searchBox{
+	padding: 0px;
+	height:31px;
+	width:500px;
+	border-radius: 10px 0px 0px 10px;
+	border-color: #589ADB;
+	border-right: 0px;
+	background: transparent;
+	font: 15px solid, "Times New Roman";
+	padding: 0px 30px 0px 10px;
+}
+.searchBox input,
+.searchBox input:active,
+.searchBox input:focus{
+	margin-top: -15px;
+	border-color: #589ADB;
+	border-right: 0px;
+}
+.searchButton{
+	padding: 0px;
+	height:36px;
+	width:80px;
+	background-color: #589ADB;
+	border-radius: 0px 10px 10px 0px;
+	border: 0px;
+	color: white;
+	-webkit-transition: color 2s ease-out;
+    -moz-transition: color 2s ease-out;
+    -ms-transition: color 2s ease-out;
+    -o-transition: color 2s ease-out;
+	transition: color 2s ease-out;
+}
+input.searchButton:hover{
+	background-color: black;
+}
+#logo_twitter{
+	right: 300px;
+	width: 27px;
+	background: url('images/social-media-icons.jpg') -124px -19px;
+	border-radius: 10px 10px 10px 10px;
+}
+#logo_twitter a:hover{
+	right: 300px;
+	width: 27px;
+	background: url('images/social-media-icons.jpg') -124px -118px;
+	border-radius: 10px 10px 10px 10px;
+}
+#logo_gPlus{
+	right: 268px;
+	width: 27px;
+	background: url('images/social-media-icons.jpg') -87px -19px;
+	border-radius: 10px 10px 10px 10px;
+}
+#logo_gPlus a:hover{
+	right: 268px;
+	width: 27px;
+	background: url('images/social-media-icons.jpg') -87px -118px;
+	border-radius: 10px 10px 10px 10px;
+}
+#logo_fb{
+	right: 234px;
+	width: 27px;
+	background: url('images/social-media-icons.jpg') -342px -19px;
+	border-radius: 10px 10px 10px 10px;
+}
+#logo_seperator{
+	background: url('images/social-media-icons.jpg') 0px 4px;
+}
+#logo_fb a:hover{
+	right: 234px;
+	width: 27px;
+	background: url('images/social-media-icons.jpg') -342px -118px;
+	border-radius: 10px 10px 10px 10px;
+}
+#logo_nav_ul{
+	position: relative;
+	//border: 2px ridge red;
+	height: 20px;
+	width: 600px;
+	float: right;
+}
+#logo_nav_ul li{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	position: absolute;
+	top: 0;
+}
+#logo_nav_ul li,#logo_nav_ul a{
+	height: 28px;
+	display: block;
+}
+img.itemImg {
+	height: 205px;
+	width: 205px;
+	align: center;
+	padding: 0px 10px 10px 30px;
+	//border: 1px solid red;
+	top: 0px;
+}
+div.itemRate{
+	font-size: 25px;
+	color: #589ADB;
+	font-weight: bold;
+	padding: 0px 80px;
+	align: center;
+}
+div.itemDesc{
+	font-size: 18px;
+	color: grey;
+	font-family: "Verdana",Sans-serif;
+	//font-weight: bold;
+	padding: 10px 20px;
+}
+</style>
+</head>
+<body bgcolor="#F2F3F4">
+	<div id="wrapper">
+		<div id="top">
+			<div id="logoBody">
+				<div id="logoCategory"> 
+					<div id="categoryHeader">&nbsp; &nbsp;Category</div>
+				</div>
+				<div id="logoContainer">
+					<div>
+						<ul id="logo_nav_ul">
+							<li id="logo_twitter"><a href="index.jsp"></a></li>
+							<li id="logo_gPlus"><a href="header.jsp"></a></li>
+							<li id="logo_fb"><a href="itemCatalogue.jsp"></a></li>
+						</ul>
+					</div>	
+					<div class="searchArea">
+						<input class="searchBox" type="text" name="searchBox">
+						<input class="searchButton" type="submit" name="search" value="Search" >
+					</div>
+					<div id="horizontalMenuArea">
+						<ul class="horizMenu">
+							<li class="horizMenu"><a class="horizMenu" href="index.html">Home</a></li>
+							<li class="horizMenu"><a class="horizMenu" href="index.html">Products</a></li>
+							<li class="horizMenu"><a class="horizMenu" href="index.html">Best Offers</a></li>
+							<li class="horizMenu"><a class="horizMenu" href="index.html">Sales</a></li>
+							<li class="horizMenu"><a class="horizMenu" href="index.html">About US</a></li>
+							<li class="horizMenu"><a class="horizMenu" href="index.html">Contact US</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<dir id="body">
+		<div id="category">
+			<ul class="ulcategory">
+  				<li class="ulcategory"><a class="ulcategory" href="index.html">Category One</a></li>
+  				<li class="ulcategory"><a class="ulcategory" href="index.html">Category Tow</a></li>
+  				<li class="ulcategory"><a class="ulcategory" href="index.html">Category Three</a></li>
+  				<li class="ulcategory"><a class="ulcategory" href="index.html">Category Four</a></li>
+			</ul>
+			&nbsp;<br>
+			&nbsp;
+			<ul class="ulcategory">
+  				<li class="ulcategory"><a class="ulcategory" href="index.html">Filter One</a></li>
+  				<li class="ulcategory"><a class="ulcategory" href="index.html">Filter Tow</a></li>
+  				<li class="ulcategory"><a class="ulcategory" href="index.html">Filter Three</a></li>
+			</ul>
+		</div>
+		<div id="container">
+		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <div id="itemHeader"> &nbsp; &nbsp; Items List</div>
+		<div id="item"> 
+			<img class="itemImg" alt="cake one" src="images/black_forest.jpeg" > 
+			<div class="itemRate">&#x20b9;100.00</div>
+			<div class="itemDesc">Black current</div>
+		</div> &nbsp; &nbsp; &nbsp; &nbsp;
+		<div id="item"> 
+			<img class="itemImg" alt="cake one" src="images/button_scotch.jpeg" > 
+			<div class="itemRate">&#x20b9;100.00</div>
+			<div class="itemDesc">Buttor Scotch</div>
+		</div> &nbsp; &nbsp; &nbsp; &nbsp;
+		<div id="item"> 
+			<img class="itemImg" alt="cake one" src="images/black_forest.jpeg" > 
+			<div class="itemRate">&#x20b9;100.00</div>
+			<div class="itemDesc">Black current</div>
+		</div> &nbsp; &nbsp; &nbsp; &nbsp;
+		<div id="item"> 
+			<img class="itemImg" alt="cake one" src="images/button_scotch.jpeg" > 
+			<div class="itemRate">&#x20b9;100.00</div>
+			<div class="itemDesc">Buttor Scotch</div>
+		</div> &nbsp; &nbsp; &nbsp; &nbsp;
+		<div id="item"> 
+			<img class="itemImg" alt="cake one" src="images/black_forest.jpeg" > 
+			<div class="itemRate">&#x20b9;100.00</div>
+			<div class="itemDesc">Black current</div>
+		</div> &nbsp; &nbsp; &nbsp; &nbsp;
+		<div id="item"> 
+			<img class="itemImg" alt="cake one" src="images/button_scotch.jpeg" > 
+			<div class="itemRate">&#x20b9;100.00</div>
+			<div class="itemDesc">Buttor Scotch</div>
+		</div> &nbsp; &nbsp; &nbsp; &nbsp;
+		<div id="itemHeader"> &nbsp; &nbsp; Items List</div>
+		<div id="item"> 
+			<img class="itemImg" alt="cake one" src="images/button_scotch.jpeg" > 
+			<div class="itemRate">&#x20b9;100.00</div>
+			<div class="itemDesc">Buttor Scotch</div>
+		</div> &nbsp; &nbsp; &nbsp; &nbsp;
+		<div id="item"> 
+			<img class="itemImg" alt="cake one" src="images/black_forest.jpeg" > 
+			<div class="itemRate">&#x20b9;100.00</div>
+			<div class="itemDesc">Black current</div>
+		</div> &nbsp; &nbsp; &nbsp; &nbsp;
+		<div id="item"> 
+			<img class="itemImg" alt="cake one" src="images/button_scotch.jpeg" > 
+			<div class="itemRate">&#x20b9;100.00</div>
+			<div class="itemDesc">Buttor Scotch</div>
+		</div> &nbsp; &nbsp; &nbsp; &nbsp;
+		<div id="item"> 
+			<img class="itemImg" alt="cake one" src="images/black_forest.jpeg" > 
+			<div class="itemRate">&#x20b9;100.00</div>
+			<div class="itemDesc">Black current</div>
+		</div> &nbsp; &nbsp; &nbsp; &nbsp;
+		<div id="item"> 
+			<img class="itemImg" alt="cake one" src="images/button_scotch.jpeg" > 
+			<div class="itemRate">&#x20b9;100.00</div>
+			<div class="itemDesc">Buttor Scotch</div>
+		</div> &nbsp; &nbsp; &nbsp; &nbsp;
+		<div id="item"> 
+			<img class="itemImg" alt="cake one" src="images/black_forest.jpeg" > 
+			<div class="itemRate">&#x20b9;100.00</div>
+			<div class="itemDesc">Black current</div>
+		</div> &nbsp; &nbsp; &nbsp; &nbsp;
+		<div id="item"> 
+			<img class="itemImg" alt="cake one" src="images/button_scotch.jpeg" > 
+			<div class="itemRate">&#x20b9;100.00</div>
+			<div class="itemDesc">Buttor Scotch</div>
+		</div> &nbsp; &nbsp; &nbsp; &nbsp;
+		<div id="item"> 
+			<img class="itemImg" alt="cake one" src="images/black_forest.jpeg" > 
+			<div class="itemRate">&#x20b9;100.00</div>
+			<div class="itemDesc">Black current</div>
+		</div> &nbsp; &nbsp; &nbsp; &nbsp;
+		</div>
+	</dir>
+	<div id="foot">
+		<div id="footerInfo">
+			<ul class="footerMenu">
+				<li class="footerMenu">Information</li>
+				<li class="footerMenu"><a class="footerMenu" href="index.html">Home</a></li>
+				<li class="footerMenu"><a class="footerMenu" href="index.html">About US</a></li>
+				<li class="footerMenu"><a class="footerMenu" href="index.html">Contact US</a></li>
+				<li class="footerMenu"><a class="footerMenu" href="index.html">Offers</a></li>
+			</ul>
+			<ul class="footerMenu">
+				<li class="footerMenu">Collections</li>
+				<li class="footerMenu"><a class="footerMenu" href="index.html">Category One</a></li>
+				<li class="footerMenu"><a class="footerMenu" href="index.html">Category Two</a></li>
+				<li class="footerMenu"><a class="footerMenu" href="index.html">Category Three</a></li>
+				<li class="footerMenu"><a class="footerMenu" href="index.html">Category Four</a></li>
+			</ul>
+			<ul class="footerMenu">
+				<li class="footerMenu">My Account</li>
+				<li class="footerMenu"><a class="footerMenu" href="index.html">My Account</a></li>
+				<li class="footerMenu"><a class="footerMenu" href="index.html">My Cart</a></li>
+				<li class="footerMenu"><a class="footerMenu" href="index.html">Sign up</a></li>
+			</ul>
+			<ul class="footerMenu">
+				<li class="footerMenu">Follow US</li>
+				<li class="footerMenu"><a class="footerMenu" href="index.html">Twitter</a></li>
+				<li class="footerMenu"><a class="footerMenu" href="index.html">FaceBook</a></li>
+				<li class="footerMenu"><a class="footerMenu" href="index.html">YouTuebe</a></li>
+				<li class="footerMenu"><a class="footerMenu" href="index.html">Google+</a></li>
+			</ul>
+		</div>
+		<hr class="footHR">
+	</div>
+</div>
+</body>
+</html>

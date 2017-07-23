@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Filter Test</title>
+<style type="text/css">
+
+div {
+	display: block;
+}
+
+#wrapper{
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+}
+#top{
+	width: 100%;
+	height: 150px;
+	background: white;
+	//border: 2px ridge red;
+}
+#logoBody{
+	width: 1200px;
+	height: 144px;
+	margin: 0 auto;
+	background: white;
+	//border: 2px ridge red;
+}
+
+#logoCategory{
+	width: 200px;
+	height: 146px;
+	background-color: white;
+	position: absolute;
+	float: left;
+	//border: 1px ridge black;
+}
+
+#logoContainer{
+	width: 980px;
+	height: 142px;
+	background-color: white;
+	float: right;
+	border: 1px ridge black;
+}
+#body{
+	width: 1200px;
+	height: 1400px;
+	margin: 0 auto;
+	background: #F2F3F4;
+	padding: 0;
+	//border: 2px ridge black;
+}
+#foot{
+	width: 100%;
+	height: 150px;
+	background: #1B2631;
+}
+#category{
+	width: 200px;
+	height: 1400px;
+	background-color: #F2F3F4;
+	position: absolute;
+	float: left;
+	//border: 2px ridge yellow;
+}
+#categoryHeader{
+	width: 200px;
+	height: 30px;
+	background-color: #589ADB;
+	border-radius: 10px 10px 0px 0px;
+	position: absolute;
+	bottom: 0px;
+	font-style: Bold;
+	font-size: 20px;
+	color: white;
+	float: left;
+	padding: 5px 0px 5px;
+}
+#horizontalMenu{
+	position: absolute;
+	top: 0px;
+	width: 800px;
+	height: 40px;
+	background-color: #102841;
+	border-radius: 10px 10px 0px 0px;
+	font-style: Bold;
+	font-size: 20px;
+	color: white;
+	bottom: 10px;
+}
+#container{
+	width: 980px;
+	height: 1150px;
+	background-color: #F2F3F4;
+	float: right;
+	//padding: 20px 0px 20px 20px;
+	//border: 2px ridge red;
+}
+
+#itemHeader{
+	width: 900px;
+	height: 45px;
+	background-color: white;
+	text-align: left;
+	font-size: 20px;
+	//border: 2px ridge red;
+	margin: 20px;
+}
+#item{
+	display: inline-block;
+	float: left;
+	width: 270px;
+	height: 350px;
+	margin: 20px 20px 20px 20px;
+	background-color: white;
+	//border: 2px ridge red;
+}
+ul.ulcategory{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 200px;
+	background-color: white;
+}
+li.ulcategory{
+border-bottom: 2px solid #F2F3F4;
+
+}
+li.ulcategory:last-child {
+    border-bottom: none;
+}
+li a.ulcategory{
+	display: block;
+	color: #000;
+	padding: 8px 10px;
+	text-decoration: none;
+	font-size: 13px;
+}
+li a.ulcategory:hover{
+	background-color: white;
+	color: blue;
+}
+
+ul.horiz-menu{
+	position: absolute;
+	bottom: 0px;
+	list-style-type: none;
+	margin: 0;
+    padding: 0;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    
+}
+li.horiz-menu{
+	display: inline;
+	float: left;
+}
+
+li a.horiz-menu{
+	display: block;
+	color: white;
+	padding: 8px 10px;
+	text-decoration: none;
+	font-size: 17px;
+}
+table{
+	width: 100%;
+	height: 150px;
+	border-collapse: collapse;
+	padding: 0;
+}
+thead{
+	height: 100px;
+}
+</style>
+</head>
+<body bgcolor="#F2F3F4">
+<div id="wrapper">
+	<div id="top">
+		<div id="logoBody">
+			<div id="logoCategory"> 
+				<div id="categoryHeader">&nbsp; &nbsp;Category</div>
+			</div>
+			<div id="logoContainer">
+				<div id="horizontalMenu">test</div> 
+			</div>
+		</div>
+		
+	</div>
+	<dir id="body">
+		<div id="category">
+			<ul class="ulcategory">
+  				<li class="ulcategory"><a class="ulcategory" href="FilterTest.html">Category One</a></li>
+  				<li class="ulcategory"><a class="ulcategory" href="FilterTest.html">Category Tow</a></li>
+  				<li class="ulcategory"><a class="ulcategory" href="FilterTest.html">Category Three</a></li>
+			</ul>
+			&nbsp;<br>
+			&nbsp;
+			<ul class="ulcategory">
+  				<li class="ulcategory"><a class="ulcategory" href="FilterTest.html">Filter One</a></li>
+  				<li class="ulcategory"><a class="ulcategory" href="FilterTest.html">Filter Tow</a></li>
+  				<li class="ulcategory"><a class="ulcategory" href="FilterTest.html">Filter Three</a></li>
+			</ul>
+		</div>
+		<div id="container">
+		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <div id="itemHeader"> &nbsp; &nbsp; Items List</div>
+		<div id="item"> &nbsp;</div> &nbsp; &nbsp; &nbsp; &nbsp;
+		<div id="item"> &nbsp;</div> &nbsp; &nbsp; &nbsp; &nbsp;
+		<div id="item"> &nbsp;</div> &nbsp; &nbsp; &nbsp; &nbsp;
+		<div id="item"> &nbsp;</div> &nbsp; &nbsp; &nbsp; &nbsp;
+		<div id="item"> &nbsp;</div> &nbsp; &nbsp; &nbsp; &nbsp;
+		<div id="item"> &nbsp;</div> &nbsp; &nbsp; &nbsp; &nbsp;
+		<div id="item"> &nbsp;</div> &nbsp; &nbsp; &nbsp; &nbsp;
+		<div id="item"> &nbsp;</div> &nbsp; &nbsp; &nbsp; &nbsp;
+		
+		</div>
+	</dir>
+	<div id="foot"></div>
+</div>
+</body>
+</html>
