@@ -17,7 +17,7 @@ public class PatternSubjectRecord {
 	
 	@Id
 	@Column(name="pSubjectRecordId")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long pSubjectRecordId;
 	@OneToOne(cascade = CascadeType.ALL)
 	private Subject pSubject;

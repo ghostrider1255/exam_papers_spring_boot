@@ -13,7 +13,7 @@ public class MyImage
 {
 	@Id
 	@Column(name="imageId")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long imageId;
 	private String imageTitle;
 	private byte[] imageData;

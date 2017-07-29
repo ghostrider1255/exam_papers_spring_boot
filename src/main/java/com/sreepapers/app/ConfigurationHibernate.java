@@ -12,7 +12,4 @@ public class ConfigurationHibernate {
 	public HibernateJpaSessionFactoryBean localSessionFactoryBean(){
 		return new HibernateJpaSessionFactoryBean();
 	}
-	
-	
-
 }

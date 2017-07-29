@@ -13,7 +13,7 @@ public class Person {
 
 	@Id
 	@Column(name="id")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
 	private String name;

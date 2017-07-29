@@ -37,12 +37,11 @@ public class ImageDaoImpl implements ImageDAO{
 	public void addImage(String imagePath) {
 		Session session = this.sessionFactory.getCurrentSession();
 		byte[] bFile ;
+		File imageFile = new File(imagePath);
+		bFile = new byte[(int) imageFile.length()];
 		
-		FileInputStream inputStream = null;
-		try{
-			File imageFile = new File(imagePath);
-			bFile = new byte[(int) imageFile.length()];
-			inputStream = new FileInputStream(imageFile);
+		try(FileInputStream inputStream = new FileInputStream(imageFile)){
+			
 			inputStream.read(bFile);
 			inputStream.close();
 		}

@@ -13,7 +13,7 @@ public class ResultPattern {
 
 	@Id
 	@Column(name="resultPatternId")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long resultPatternId;
 	private float marksPerAnswer;
 	private float negativePerWrong;

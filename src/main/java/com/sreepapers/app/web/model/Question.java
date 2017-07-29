@@ -22,7 +22,7 @@ public class Question
 {
 	@Id
 	@Column(name="questionId")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long questionId;
 	@Column(length=1000)
 	private String questionText;

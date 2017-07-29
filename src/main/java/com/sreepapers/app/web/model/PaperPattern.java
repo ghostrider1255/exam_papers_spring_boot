@@ -20,7 +20,7 @@ public class PaperPattern
 {
 	@Id
 	@Column(name="paperPatternId")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long paperPatternId;
 	private String paperPatternCode;
 	

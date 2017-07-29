@@ -13,7 +13,7 @@ public class Subject {
 
 	@Id
 	@Column(name="subjectId")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long subjectId;
 	private String subjectCode;
 	private String subjectDesc;

@@ -24,7 +24,7 @@ public class ExamQuestion {
 
 	@Id
 	@Column(name="examQuestionId")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long examQuestionId;
 	@OneToMany(cascade = CascadeType.ALL , fetch = FetchType.LAZY )
 	@JoinTable(name="ExamQuestionMap" , joinColumns = { @JoinColumn(name="examQuestionId")}, inverseJoinColumns = { @JoinColumn(name="questionId")})
