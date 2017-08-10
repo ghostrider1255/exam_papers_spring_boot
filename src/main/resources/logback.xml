@@ -30,11 +30,20 @@
 </appender>
 
 	<logger name="org.springframework" level="INFO" additivity="false">
-		<!-- <appender-ref ref="console"/> -->
+		<appender-ref ref="console"/>
+		<appender-ref ref="fileAppender"/>
+	</logger>
+	<logger name="org.hibernate" level="INFO" additivity="false">
+		<appender-ref ref="console"/>
+		<appender-ref ref="fileAppender"/>
+	</logger>
+	<logger name="com.sreepapers.app.web" level="DEBUG" additivity="false">
+		<appender-ref ref="console"/>
 		<appender-ref ref="fileAppender"/>
 	</logger>
 
 	<root level="INFO">
     	<appender-ref ref="console"/>
+    	<appender-ref ref="fileAppender"/>
 	</root>
 </configuration>

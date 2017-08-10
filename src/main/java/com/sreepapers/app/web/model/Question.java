@@ -1,5 +1,6 @@
 package com.sreepapers.app.web.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,12 +19,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="QUESTION")
-public class Question 
+public class Question implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6649881076488319134L;
 	@Id
 	@Column(name="questionId")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long questionId;
+	private Long questionId;
 	@Column(length=1000)
 	private String questionText;
 	private String choiceOne;

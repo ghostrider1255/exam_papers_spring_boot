@@ -1,5 +1,7 @@
 package com.sreepapers.app.web.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,20 +11,24 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="RESULTPATTERN")
-public class ResultPattern {
+public class ResultPattern implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6434547282898295758L;
 	@Id
 	@Column(name="resultPatternId")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long resultPatternId;
+	private Long resultPatternId;
 	private float marksPerAnswer;
 	private float negativePerWrong;
 	private float passPercentage;
 	
-	public long getResultPatternId() {
+	public Long getResultPatternId() {
 		return resultPatternId;
 	}
-	public void setResultPatternId(long resultPatternId) {
+	public void setResultPatternId(Long resultPatternId) {
 		this.resultPatternId = resultPatternId;
 	}
 	public float getPassPercentage() {

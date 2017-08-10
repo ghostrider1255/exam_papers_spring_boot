@@ -1,5 +1,7 @@
 package com.sreepapers.app.web.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,20 +11,24 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="SUBJECT")
-public class Subject {
+public class Subject implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3494141867172865683L;
 	@Id
 	@Column(name="subjectId")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long subjectId;
+	private Long subjectId;
 	private String subjectCode;
 	private String subjectDesc;
 	private boolean subjectStatus;
 	
-	public long getSubjectId() {
+	public Long getSubjectId() {
 		return subjectId;
 	}
-	public void setSubjectId(long subjectId) {
+	public void setSubjectId(Long subjectId) {
 		this.subjectId = subjectId;
 	}
 	public String getSubjectCode() {

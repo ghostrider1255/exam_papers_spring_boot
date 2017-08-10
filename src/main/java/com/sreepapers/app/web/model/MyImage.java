@@ -1,5 +1,7 @@
 package com.sreepapers.app.web.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,19 +11,23 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="imageTest")
-public class MyImage 
+public class MyImage implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8906489443677120849L;
 	@Id
 	@Column(name="imageId")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long imageId;
+	private Long imageId;
 	private String imageTitle;
 	private byte[] imageData;
 	
-	public long getImageId() {
+	public Long getImageId() {
 		return imageId;
 	}
-	public void setImageId(long imageId) {
+	public void setImageId(Long imageId) {
 		this.imageId = imageId;
 	}
 	public String getImageTitle() {

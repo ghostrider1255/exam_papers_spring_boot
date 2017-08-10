@@ -1,5 +1,7 @@
 package com.sreepapers.app.web.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,12 +11,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="ROLE")
-public class Role {
+public class Role implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5020080567967728844L;
 	@Id
 	@Column(name="roleId")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int roleId;
+	private Long roleId;
 	private String roleCode;
 	private String roleName;
 	private String roleDesc;
@@ -27,10 +33,10 @@ public class Role {
 		this.roleName = roleName;
 	}
 	
-	public int getRoleId() {
+	public Long getRoleId() {
 		return roleId;
 	}
-	public void setRoleId(int roleId) {
+	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
 	}
 	public String getRoleCode() {

@@ -1,5 +1,6 @@
 package com.sreepapers.app.web.model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -20,12 +21,17 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="EXAM")
-public class Exam {
+public class Exam implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8798477103006505006L;
 
 	@Id
 	@Column(name="examId")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long examId;
+	private Long examId;
 	private String examCode;
 	private String examDesc;
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -37,10 +43,10 @@ public class Exam {
 	@OneToOne(cascade = CascadeType.ALL)
 	private ResultPattern resultPattern;
 	
-	public long getExamId() {
+	public Long getExamId() {
 		return examId;
 	}
-	public void setEaxmId(long examId) {
+	public void setEaxmId(Long examId) {
 		this.examId = examId;
 	}
 	public String getExamCode() {
@@ -86,5 +92,10 @@ public class Exam {
 		else{
 			this.examQuestions = null;
 		}
+	}
+	
+	@Override
+	public String toString(){
+		return "Exam[code="+this.examCode+", Desc="+this.examDesc+"]";
 	}
 }

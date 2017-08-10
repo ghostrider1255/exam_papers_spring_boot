@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sreepapers.app.web.dao.ImageDAO;
-import com.sreepapers.app.web.dao.modelrepository.ImageRepository;
+import com.sreepapers.app.web.dao.jpa.repository.ImageRepository;
 import com.sreepapers.app.web.model.MyImage;
 import com.sreepapers.app.web.model.PaperPattern;
 

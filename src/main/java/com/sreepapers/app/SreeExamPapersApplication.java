@@ -1,5 +1,6 @@
 package com.sreepapers.app;
 
+import org.springframework.boot.Banner.Mode;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -13,6 +14,8 @@ public class SreeExamPapersApplication extends SpringBootServletInitializer{
 		return application.sources(SreeExamPapersApplication.class);
 	}
 	public static void main(String[] args) {
-		SpringApplication.run(SreeExamPapersApplication.class, args);
+		new SpringApplicationBuilder(SreeExamPapersApplication.class)
+		//.bannerMode(Mode.CONSOLE)
+		.build().run(args);
 	}
 }

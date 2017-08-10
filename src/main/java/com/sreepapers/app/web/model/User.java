@@ -1,35 +1,34 @@
 package com.sreepapers.app.web.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="APPLICATIONUSER")
-public class User {
+public class User implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1548058946313835671L;
 	@Id
 	@Column(name="userId")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int userId;
+	private Long userId;
 	private String userCode;
 	private String userName;
 	private boolean userStatus=true;
 	
-	public int getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 	public String getUserCode() {

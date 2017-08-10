@@ -93,9 +93,9 @@ public class PaperPatternDAOImpl implements PaperPatternDAO{
 					questions.add(tempQuestion);
 				}
 			}
-			if(questions.size()> patternSubject.getNumberOfQuestions()){
-				questions = questions.subList(0, (int)patternSubject.getNumberOfQuestions());	
-			}
+			/*if(questions.size()> patternSubject.getNumberOfQuestions()){
+				questions = questions.subList(0, patternSubject.getNumberOfQuestions());	
+			}*/
 			examQuestion.setQuestions(questions);
 			questionsMapBySubject.put(patternSubject.getpSubject().getSubjectDesc(), examQuestion);
 		}

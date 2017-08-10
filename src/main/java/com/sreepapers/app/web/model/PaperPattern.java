@@ -1,5 +1,6 @@
 package com.sreepapers.app.web.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -16,12 +17,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="PAPERPATTERN")
-public class PaperPattern 
+public class PaperPattern implements Serializable 
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6092193070064385083L;
 	@Id
 	@Column(name="paperPatternId")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long paperPatternId;
+	private Long paperPatternId;
 	private String paperPatternCode;
 	
 	@OneToMany(cascade = CascadeType.ALL,mappedBy= "paperPattern")
@@ -38,11 +43,11 @@ public class PaperPattern
 		this.subjectRules = subjectRules;
 	}
 
-	public long getPaperPatternId() {
+	public Long getPaperPatternId() {
 		return paperPatternId;
 	}
 
-	public void setPaperPatternId(long paperPatternId) {
+	public void setPaperPatternId(Long paperPatternId) {
 		this.paperPatternId = paperPatternId;
 	}
 
@@ -70,5 +75,10 @@ public class PaperPattern
 		else{
 			this.exams = null;
 		}
+	}
+	
+	@Override
+	public String toString(){
+		return "PaperPattern[Id="+this.paperPatternId+", code="+this.paperPatternCode+"]";
 	}
 }
