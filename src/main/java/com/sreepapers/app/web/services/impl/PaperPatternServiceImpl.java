@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sreepapers.app.web.dao.PaperPatternDAO;
 import com.sreepapers.app.web.model.ExamQuestion;
 import com.sreepapers.app.web.model.PaperPattern;
-import com.sreepapers.app.web.model.Question;
 import com.sreepapers.app.web.services.PaperPatternService;
 
 @Service

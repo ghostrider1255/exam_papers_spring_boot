@@ -1,67 +1,111 @@
 package com.sreepapers.app.web.dao.impl;
 
+import static com.sreepapers.app.web.utils.properties.HelperProperties.POSTFIX;
+import static com.sreepapers.app.web.utils.properties.HelperProperties.PREFIX;
+import static com.sreepapers.app.web.utils.properties.HelperProperties.REST_SERVER_HOST_URL;
+
+import java.util.Arrays;
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
 import com.sreepapers.app.web.dao.PatternSubjectRecordDAO;
 import com.sreepapers.app.web.model.PatternSubjectRecord;
+import com.sreepapers.app.web.utils.HelperUtils;
 
 public class PatternSubjectRecordDAOImpl implements PatternSubjectRecordDAO{
 
 	private static final Logger logger = LoggerFactory.getLogger(PatternSubjectRecordDAOImpl.class);
 	
-	@Autowired
-	private SessionFactory sessionFactory;
+	public static final String SAVE_PATTERN_SUBJECT_REOCRD = "/patternSubRecAction/savePatternSubjectRecord";
+	public static final String GET_PATTERN_SUBJECT_REOCRD_LIST ="/patternSubRecAction/patternSubjectRecords";
+	public static final String DELETE_PATTERN_SUBJECT_REOCRD ="/patternSubRecAction/deletePatternSubjectRecord/{id}";
+	public static final String GET_PATTERN_SUBJECT_REOCRD ="/patternSubRecAction/patternSubjectRecord/{id}";
+	public static final String UPDATE_PATTERN_SUBJECT_REOCRD ="/patternSubRecAction/updatePatternSubjectRecord";
 	
-	public void setSessionFactory(SessionFactory sf){
-		this.sessionFactory = sf;
-	}
+	@Value(PREFIX+REST_SERVER_HOST_URL+POSTFIX)
+	private String webServerRestUrl;
+	
+	@Autowired
+	private RestTemplate restTemplate;
 	
 	@Override
 	public void addPatternSubjectRecord(PatternSubjectRecord patternSubjectRecord) {
-		Session session = this.sessionFactory.getCurrentSession();
-		session.saveOrUpdate(patternSubjectRecord);
-		logger.info("PatternSubjectRecord saved successfully, patternSubjectRecord Details="+patternSubjectRecord);
+		String url = webServerRestUrl+SAVE_PATTERN_SUBJECT_REOCRD;
+		HttpEntity<PatternSubjectRecord> requestEntity = HelperUtils.prepareRequestEntity(patternSubjectRecord);
+		
+		ResponseEntity<PatternSubjectRecord> responseEntity = restTemplate.exchange(url, HttpMethod.POST,requestEntity,PatternSubjectRecord.class);
+		PatternSubjectRecord newPatternSubjectRecord = responseEntity.getBody();
+		if(logger.isDebugEnabled()){
+			logger.debug("PatternSubjectRecord saved, PatternSubjectRecord Details={}",newPatternSubjectRecord);
+		}else{
+			logger.info("PatternSubjectRecord saved successfully");
+		}
 	}
 
 	@Override
 	public void updatePatternSubjectRecord(PatternSubjectRecord patternSubjectRecord) {
-		Session session = this.sessionFactory.getCurrentSession();
-		session.update(patternSubjectRecord);
-		logger.info("PatternSubjectRecord updated successfully, patternSubjectRecord Details="+patternSubjectRecord);
+		String url = webServerRestUrl+UPDATE_PATTERN_SUBJECT_REOCRD;
+		HttpEntity<PatternSubjectRecord> requestEntity = HelperUtils.prepareRequestEntity(patternSubjectRecord);
+		
+		ResponseEntity<PatternSubjectRecord> responseEntity = restTemplate.exchange(url, HttpMethod.POST,requestEntity,PatternSubjectRecord.class);
+		PatternSubjectRecord newPatternSubjectRecord = responseEntity.getBody();
+		if(logger.isDebugEnabled()){
+			logger.debug("PatternSubjectRecord updated , PatternSubjectRecord Details={}",newPatternSubjectRecord);
+		}
+		else{
+			logger.info("PatternSubjectRecord updated successfully");
+		}
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<PatternSubjectRecord> listPatternSubjectRecords() {
-		Session session = this.sessionFactory.getCurrentSession();
-		List<PatternSubjectRecord> patternSubjectRecordList = session.createQuery("from PatternSubjectRecord").list();
-		for(PatternSubjectRecord patternSubjectRecord : patternSubjectRecordList){
-			logger.info("PaperPattern List::"+patternSubjectRecord);
+		String url = webServerRestUrl+GET_PATTERN_SUBJECT_REOCRD_LIST;
+		
+		ResponseEntity<PatternSubjectRecord[]> responseEntity = restTemplate.getForEntity(url, PatternSubjectRecord[].class);
+		PatternSubjectRecord[] newPatternSubjectRecord = responseEntity.getBody();
+		if(logger.isDebugEnabled()){
+			logger.debug("returning PatternSubjectRecord List of count, {}",newPatternSubjectRecord.length);
 		}
-		return patternSubjectRecordList;
+		else{
+			logger.info("returning PatternSubjectRecord list successfully");
+		}
+		return Arrays.asList(newPatternSubjectRecord);
 	}
 
 	@Override
 	public PatternSubjectRecord getPatternSubjectRecordById(long patternSubjectRecordId) {
-		Session session = this.sessionFactory.getCurrentSession();		
-		PatternSubjectRecord patternSubjectRecord = (PatternSubjectRecord) session.load(PatternSubjectRecord.class, new Long(patternSubjectRecordId));
-		logger.info("PatternSubjectRecord loaded successfully, patternSubjectRecord details="+patternSubjectRecord);
-		return patternSubjectRecord;
+		String url = webServerRestUrl+GET_PATTERN_SUBJECT_REOCRD;
+		HttpHeaders header = new HttpHeaders();
+		header.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<String> requestEntity = new HttpEntity<>(header);
+		
+		ResponseEntity<PatternSubjectRecord> responseEntity = restTemplate.exchange(url, HttpMethod.GET,requestEntity,PatternSubjectRecord.class,patternSubjectRecordId);
+		PatternSubjectRecord newPatternSubjectRecord = responseEntity.getBody();
+		if(logger.isDebugEnabled()){
+			logger.debug("returning PatternSubjectRecord object, PatternSubjectRecord Details={}",newPatternSubjectRecord);
+		}
+		else{
+			logger.info("returning PatternSubjectRecord object");
+		}
+		return newPatternSubjectRecord;
 	}
 
 	@Override
 	public void removePatternSubjectRecord(long patternSubjectRecordId) {
-		Session session = this.sessionFactory.getCurrentSession();
-		PatternSubjectRecord patternSubjectRecord = (PatternSubjectRecord) session.load(PatternSubjectRecord.class, new Long(patternSubjectRecordId));
-		if(null != patternSubjectRecord){
-			session.delete(patternSubjectRecord);
-		}
-		logger.info("PatternSubjectRecord deleted successfully, patternSubjectRecord details="+patternSubjectRecord);
+		String url = webServerRestUrl+DELETE_PATTERN_SUBJECT_REOCRD;
+		HttpHeaders header = new HttpHeaders();
+		header.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<String> requestEntity = new HttpEntity<>(header);
+		restTemplate.exchange(url, HttpMethod.DELETE,requestEntity,PatternSubjectRecord.class,patternSubjectRecordId);
 	}
 }

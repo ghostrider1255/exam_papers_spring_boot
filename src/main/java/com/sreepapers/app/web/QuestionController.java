@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sreepapers.app.web.model.Question;
-import com.sreepapers.app.web.model.Subject;
 import com.sreepapers.app.web.services.QuestionService;
 import com.sreepapers.app.web.services.SubjectService;
 
@@ -68,7 +67,7 @@ public class QuestionController {
 	@RequestMapping(value= "/questions/addQuestion", method = RequestMethod.POST)
 	public String addQuestion(@ModelAttribute("question") Question question,BindingResult result,Model model){
 			
-		if(question.getQuestionId() == 0){
+		if(question!=null /*&& question.getQuestionId() == 0*/){
 			//new Subject, add it
 			this.questionService.addQuestion(question);
 		}else{

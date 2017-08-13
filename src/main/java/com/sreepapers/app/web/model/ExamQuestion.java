@@ -54,4 +54,8 @@ public class ExamQuestion implements Serializable{
 	public void setExam(Exam exam) {
 		this.exam = exam;
 	}
+	
+	public String toString(){
+		return "ExamQuestion[examQuestionId="+this.examQuestionId+",questionsCount="+(questions!=null?questions.size():0)+"]";
+	}
 }

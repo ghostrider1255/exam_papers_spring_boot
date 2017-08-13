@@ -1,41 +1,51 @@
 package com.sreepapers.app.web.dao.impl;
 
+import static com.sreepapers.app.web.utils.properties.HelperProperties.POSTFIX;
+import static com.sreepapers.app.web.utils.properties.HelperProperties.PREFIX;
+import static com.sreepapers.app.web.utils.properties.HelperProperties.REST_SERVER_HOST_URL;
+
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Arrays;
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.client.RestTemplate;
 
 import com.sreepapers.app.web.dao.ImageDAO;
-import com.sreepapers.app.web.dao.jpa.repository.ImageRepository;
 import com.sreepapers.app.web.model.MyImage;
-import com.sreepapers.app.web.model.PaperPattern;
+import com.sreepapers.app.web.utils.HelperUtils;
 
 @Repository
 public class ImageDaoImpl implements ImageDAO{
 
 	private static final Logger logger = LoggerFactory.getLogger(ImageDaoImpl.class);
+
+	public static final String SAVE_IMAGE = "/imageAction/saveImage";
+	public static final String GET_IMAGES="/imageAction/images";
+	public static final String DELETE_IMAGE="/imageAction/deleteImage/";
+	public static final String GET_IMAGE="/imageAction/image/";
+	public static final String UPDATE_IMAGE="/imageAction/updateImage";
+	
+	@Value(PREFIX+REST_SERVER_HOST_URL+POSTFIX)
+	private String webServerRestUrl;
 	
 	@Autowired
-	private SessionFactory sessionFactory;
-	
-	@Autowired
-	ImageRepository imageRepository;
-	
-	public void setSessionFactory(SessionFactory sf){
-		this.sessionFactory = sf;
-	}
+	private RestTemplate restTemplate;
 	
 	@Override
 	public void addImage(String imagePath) {
-		Session session = this.sessionFactory.getCurrentSession();
+		
+		String url = webServerRestUrl+SAVE_IMAGE;
+		
+		MyImage image = new MyImage();
 		byte[] bFile ;
 		File imageFile = new File(imagePath);
 		bFile = new byte[(int) imageFile.length()];
@@ -46,35 +56,40 @@ public class ImageDaoImpl implements ImageDAO{
 			inputStream.close();
 		}
 		catch(Exception imageException){
-			imageException.printStackTrace();
+			logger.error(imageException.getMessage());
 		}
-		session.persist(imagePath);
+		image.setImageTitle(imagePath);
+		image.setImageData(bFile);
+		
+		HttpEntity<MyImage> requestEntity = HelperUtils.prepareRequestEntity(image);
+		
+		ResponseEntity<MyImage> responseEntity = restTemplate.exchange(url, HttpMethod.POST,requestEntity,MyImage.class);
+		MyImage newImage = responseEntity.getBody();
+		if(logger.isDebugEnabled()){
+			logger.debug("Image saved successfully, Image Details={}",newImage);
+		}else{
+			logger.info("Image saved successfully");
+		}
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<MyImage> listImages() {
-		/*Session session = this.sessionFactory.getCurrentSession();
-		List<MyImage> imageList = session.createQuery("from MyImage").list();
-		return imageList;*/
-		Iterable<MyImage> imageList = imageRepository.findAll();
-		Iterator<MyImage> it = imageList.iterator();
 		
-		List<MyImage> finalImageList = new ArrayList<MyImage>();
-		while(it.hasNext()){
-			finalImageList.add(it.next());
-		}
-		
-		return finalImageList;
+		String url = webServerRestUrl+GET_IMAGES;
+		HttpEntity<String> requestEntity = HelperUtils.prepareRequestEntity(null);
+		ResponseEntity<MyImage[]> responseEntity = restTemplate.exchange(url, HttpMethod.GET,requestEntity,MyImage[].class);
+		MyImage[] imageList = responseEntity.getBody();
+			
+		return Arrays.asList(imageList);
 	}
 	
 	public MyImage getImageById(long imageId) {
-		/*Session session = this.sessionFactory.getCurrentSession();		
-		MyImage myImage = (MyImage) session.load(MyImage.class, imageId);
 		
-		return myImage;*/
+		String url = webServerRestUrl+GET_IMAGE+imageId;
+		HttpEntity<String> requestEntity = HelperUtils.prepareRequestEntity(null);
+		ResponseEntity<MyImage> responseEntity = restTemplate.exchange(url, HttpMethod.GET,requestEntity,MyImage.class);
 		
-		return imageRepository.getImageByImageId(imageId);
+		return responseEntity.getBody();
 	}
 
 }

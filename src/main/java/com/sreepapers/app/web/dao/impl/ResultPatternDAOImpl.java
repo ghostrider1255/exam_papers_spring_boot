@@ -1,67 +1,114 @@
 package com.sreepapers.app.web.dao.impl;
 
+import static com.sreepapers.app.web.utils.properties.HelperProperties.POSTFIX;
+import static com.sreepapers.app.web.utils.properties.HelperProperties.PREFIX;
+import static com.sreepapers.app.web.utils.properties.HelperProperties.REST_SERVER_HOST_URL;
+
+import java.util.Arrays;
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
 import com.sreepapers.app.web.dao.ResultPatternDAO;
 import com.sreepapers.app.web.model.ResultPattern;
+import com.sreepapers.app.web.utils.HelperUtils;
 
 public class ResultPatternDAOImpl implements ResultPatternDAO{
 
 	private static final Logger logger = LoggerFactory.getLogger(ResultPatternDAOImpl.class);
 	
-	@Autowired
-	private SessionFactory sessionFactory;
+	public static final String SAVE_RESULT_PATTERN = "/resultPatternAction/resultPattern";
+	public static final String GET_RESULT_PATTERN_LIST ="/resultPatternAction/resultPatterns";
+	public static final String DELETE_RESULT_PATTER ="/resultPatternAction/deleteResultPattern/{id}";
+	public static final String GET_RESULT_PATTERN ="/resultPatternAction/resultPattern/{id}";
+	public static final String UPDATE_RESULT_PATTERN ="/resultPatternAction/updateResultPattern/{id}";
 	
-	public void setSessionFactory(SessionFactory sf){
-		this.sessionFactory = sf;
-	}
+	@Value(PREFIX+REST_SERVER_HOST_URL+POSTFIX)
+	private String webServerRestUrl;
+	
+	@Autowired
+	private RestTemplate restTemplate;
+	
 	
 	@Override
 	public void addResultPattern(ResultPattern resultPattern) {
-		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(resultPattern);
-		logger.info("ResultPattern saved successfully, resultPattern Details="+resultPattern);
+		String url = webServerRestUrl+SAVE_RESULT_PATTERN;
+		HttpEntity<ResultPattern> requestEntity = HelperUtils.prepareRequestEntity(resultPattern);
+		
+		ResponseEntity<ResultPattern> responseEntity = restTemplate.exchange(url, HttpMethod.POST,requestEntity,ResultPattern.class);
+		ResultPattern newResultPattern = responseEntity.getBody();
+		if(logger.isDebugEnabled()){
+			logger.debug("ResultPattern saved, Question Details={}",newResultPattern);
+		}else{
+			logger.info("ResultPattern saved successfully");
+		}
 	}
 
 	@Override
 	public void updateResultPattern(ResultPattern resultPattern) {
-		Session session = this.sessionFactory.getCurrentSession();
-		session.update(resultPattern);
-		logger.info("ResultPattern updated successfully, resultPattern Details="+resultPattern);
+		String url = webServerRestUrl+UPDATE_RESULT_PATTERN;
+		HttpEntity<ResultPattern> requestEntity = HelperUtils.prepareRequestEntity(resultPattern);
+		
+		ResponseEntity<ResultPattern> responseEntity = restTemplate.exchange(url, HttpMethod.POST,requestEntity,ResultPattern.class);
+		ResultPattern newResultPattern = responseEntity.getBody();
+		if(logger.isDebugEnabled()){
+			logger.debug("ResultPattern updated, ResultPattern Details={}",newResultPattern);
+		}else{
+			logger.info("ResultPattern updated successfully");
+		}
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<ResultPattern> listResultPatterns() {
-		Session session = this.sessionFactory.getCurrentSession();
-		List<ResultPattern> resultPatternsList = session.createQuery("from ResultPattern").list();
-		for(ResultPattern resultPattern : resultPatternsList){
-			logger.info("ResultPattern List::"+resultPattern);
+		String url = webServerRestUrl+GET_RESULT_PATTERN_LIST;
+		
+		HttpHeaders header = new HttpHeaders();
+		header.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<String> requestEntity = new HttpEntity<>(header);
+		
+		ResponseEntity<ResultPattern[]> responseEntity = restTemplate.exchange(url, HttpMethod.GET,requestEntity,ResultPattern[].class);
+		ResultPattern[] newResultPattern = responseEntity.getBody();
+		if(logger.isDebugEnabled()){
+			logger.debug("ResultPattern list, Question length={}",newResultPattern.length);
+		}else{
+			logger.info("returning ResultPattern list");
 		}
-		return resultPatternsList;
+		return Arrays.asList(newResultPattern);
 	}
 
 	@Override
 	public ResultPattern getResultPatternById(long resultPatternId) {
-		Session session = this.sessionFactory.getCurrentSession();		
-		ResultPattern resultPattern = (ResultPattern) session.load(ResultPattern.class, new Long(resultPatternId));
-		logger.info("ResultPattern loaded successfully, resultPattern details="+resultPattern);
-		return resultPattern;
+		String url = webServerRestUrl+GET_RESULT_PATTERN;
+		HttpHeaders header = new HttpHeaders();
+		header.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<String> requestEntity = new HttpEntity<>(header);
+		
+		ResponseEntity<ResultPattern> responseEntity = restTemplate.exchange(url, HttpMethod.GET,requestEntity,ResultPattern.class,resultPatternId);
+		ResultPattern newResultPattern = responseEntity.getBody();
+		if(logger.isDebugEnabled()){
+			logger.debug("returning ResultPattern object, ResultPattern Details={}",newResultPattern);
+		}
+		else{
+			logger.info("returning ResultPattern object");
+		}
+		return newResultPattern;
 	}
 
 	@Override
 	public void removeResultPattern(long resultPatternId) {
-		Session session = this.sessionFactory.getCurrentSession();
-		ResultPattern resultPattern = (ResultPattern) session.load(ResultPattern.class, new Long(resultPatternId));
-		if(null != resultPattern){
-			session.delete(resultPattern);
-		}
-		logger.info("ResultPattern deleted successfully, resultPattern details="+resultPattern);
+		String url = webServerRestUrl+DELETE_RESULT_PATTER;
+		HttpHeaders header = new HttpHeaders();
+		header.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<String> requestEntity = new HttpEntity<>(header);
+		restTemplate.exchange(url, HttpMethod.DELETE,requestEntity,ResultPattern.class,resultPatternId);
 	}
 }

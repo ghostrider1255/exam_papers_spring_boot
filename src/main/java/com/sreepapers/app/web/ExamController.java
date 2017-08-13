@@ -20,15 +20,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.sreepapers.app.web.model.Exam;
 import com.sreepapers.app.web.model.ExamQuestion;
 import com.sreepapers.app.web.model.PaperPattern;
-import com.sreepapers.app.web.model.PatternSubjectRecord;
 import com.sreepapers.app.web.model.Question;
-import com.sreepapers.app.web.model.Subject;
 import com.sreepapers.app.web.services.ExamQuestionService;
 import com.sreepapers.app.web.services.ExamService;
 import com.sreepapers.app.web.services.PaperPatternService;
 import com.sreepapers.app.web.services.PatternSubjectRecordService;
 import com.sreepapers.app.web.services.QuestionService;
-import com.sreepapers.app.web.services.SubjectService;
 
 @Controller
 public class ExamController {

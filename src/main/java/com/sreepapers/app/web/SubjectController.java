@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.sreepapers.app.web.model.Person;
 import com.sreepapers.app.web.model.Subject;
-import com.sreepapers.app.web.services.PersonService;
 import com.sreepapers.app.web.services.SubjectService;
 
 @Controller

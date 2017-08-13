@@ -45,10 +45,10 @@ public class Question implements Serializable
 	@ManyToOne
 	private ExamQuestion examQuestion;
 	
-	public long getQuestionId() {
+	public Long getQuestionId() {
 		return questionId;
 	}
-	public void setQuestionId(long questionId) {
+	public void setQuestionId(Long questionId) {
 		this.questionId = questionId;
 	}
 	public String getChoiceOne() {
@@ -110,5 +110,10 @@ public class Question implements Serializable
 	}
 	public void setSubjects(Set<Subject> subjects) {
 		this.subjects = subjects;
+	}
+	
+	public String toString(){
+		return "Question[qurdyionText="+this.questionText+", choiceOne="+this.choiceOne+", choiceTwo="+this.choiceTwo+", choiceThree="+this.choiceThree+","
+				+ " choiceFour="+this.choiceFour+", answer="+this.answer+", status="+this.status+"]";
 	}
 }

@@ -56,4 +56,8 @@ public class PatternSubjectRecord implements Serializable{
 	public void setPaperPattern(PaperPattern paperPattern) {
 		this.paperPattern = paperPattern;
 	}
+	
+	public String toString(){
+		return "PatternSubject[pSubjectRecordId="+this.pSubjectRecordId+",number of Question="+this.numberOfQuestions+", "+this.pSubject+"]";
+	}
 }
